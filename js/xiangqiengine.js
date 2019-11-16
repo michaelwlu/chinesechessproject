@@ -5,76 +5,40 @@
 // Library of Default Positions at Game Start [file, rank]
 // Global Object (Complete)
 const defaultPositions = {
-    chariot_red_left: [1,1],
-    horse_red_left: [2,1],
-    elephant_red_left: [3,1],
-    advisor_red_left: [4,1],
-    general_red: [5,1],
-    advisor_red_right: [6,1],
-    elephant_red_right: [7,1],
-    horse_red_right: [8,1],
-    chariot_red_right: [9,1],
-    cannon_red_left: [2,3],
-    cannon_red_right: [8,3],
-    soldier_red_1: [1,4],
-    soldier_red_2: [3,4],
-    soldier_red_3: [5,4],
-    soldier_red_4: [7,4],
-    soldier_red_5: [9,4],
-    chariot_black_left: [1,10],
-    horse_black_left: [2,10],
-    elephant_black_left: [3,10],
-    advisor_black_left: [4,10],
-    general_black: [5,10],
-    advisor_black_right: [6,10],
-    elephant_black_right: [7,10],
-    horse_black_right: [8,10],
-    chariot_black_right: [9,10],
-    cannon_black_left: [2,8],
-    cannon_black_right: [8,8],
-    soldier_black_1: [1,7],
-    soldier_black_2: [3,7],
-    soldier_black_3: [5,7],
-    soldier_black_4: [7,7],
-    soldier_black_5: [9,7],
+    chariot_red_left: [0,0],
+    horse_red_left: [1,0],
+    elephant_red_left: [2,0],
+    advisor_red_left: [3,0],
+    general_red: [4,0],
+    advisor_red_right: [5,0],
+    elephant_red_right: [6,0],
+    horse_red_right: [7,0],
+    chariot_red_right: [8,0],
+    cannon_red_left: [1,2],
+    cannon_red_right: [7,2],
+    soldier_red_1: [0,3],
+    soldier_red_2: [2,3],
+    soldier_red_3: [4,3],
+    soldier_red_4: [6,3],
+    soldier_red_5: [8,3],
+    chariot_black_left: [0,9],
+    horse_black_left: [1,9],
+    elephant_black_left: [2,9],
+    advisor_black_left: [3,9],
+    general_black: [4,9],
+    advisor_black_right: [5,9],
+    elephant_black_right: [6,9],
+    horse_black_right: [7,9],
+    chariot_black_right: [8,9],
+    cannon_black_left: [1,7],
+    cannon_black_right: [7,7],
+    soldier_black_1: [0,6],
+    soldier_black_2: [2,6],
+    soldier_black_3: [4,6],
+    soldier_black_4: [6,6],
+    soldier_black_5: [8,6],
   }
   
-  // Library of Test Positions [file, rank]
-  // Global Object (Complete)
-  const testPositions = {
-    chariot_red_left: [6,2], // [1,1]
-    // horse_red_left: [2,1],
-    // elephant_red_left: [3,1],
-    // advisor_red_left: [4,1],
-    general_red: [6,1], // [5,1]
-    // advisor_red_right: [6,1],
-    // elephant_red_right: [7,1],
-    // horse_red_right: [8,1],
-    // chariot_red_right: [9,1],
-    // cannon_red_left: [2,3],
-    // cannon_red_right: [8,3],
-    // soldier_red_1: [1,4],
-    // soldier_red_2: [3,4],
-    // soldier_red_3: [5,4],
-    // soldier_red_4: [7,4],
-    // soldier_red_5: [9,4],
-    chariot_black_left: [6,10],
-    // horse_black_left: [2,10],
-    // elephant_black_left: [3,10],
-    // advisor_black_left: [4,10],
-    general_black: [4,10], // [5,10]
-    // advisor_black_right: [6,10],
-    // elephant_black_right: [7,10],
-    // horse_black_right: [8,10],
-    // chariot_black_right: [9,10],
-    // cannon_black_left: [2,8],
-    // cannon_black_right: [8,8],
-    // soldier_black_1: [1,7],
-    // soldier_black_2: [3,7],
-    // soldier_black_3: [5,7],
-    // soldier_black_4: [7,7],
-    // soldier_black_5: [9,7],
-  }
   
   // Notation Rules Used for creating Notated Board in Board State
   // Global Object (Complete)
@@ -98,81 +62,100 @@ const defaultPositions = {
   // Global Object (Complete)
   const definedPathsRules = {
     red: {
-      elephant: [[3,1],[7,1],[1,3],[5,3],[9,3],[3,5],[7,5]],
-      advisor: [[4,1],[6,1],[5,2],[4,3],[6,3]],
-      general: [[4,1],[5,1],[6,1],[4,2],[5,2],[6,2],[4,3],[5,3],[6,3]]
+      elephant: [[2,0],[6,0],[0,2],[4,2],[8,2],[2,4],[6,4]],
+      advisor: [[3,0],[5,0],[4,1],[3,2],[5,2]],
+      general: [[3,0],[4,0],[5,0],[3,1],[4,1],[5,1],[3,2],[4,2],[5,2]]
     },
   
     black: {
-      elephant: [[3,10],[7,10],[1,8],[5,8],[9,8],[3,6],[7,6]],
-      advisor: [[4,10],[6,10],[5,9],[4,8],[6,8]],
-      general: [[4,10],[5,10],[6,10],[4,9],[5,9],[6,9],[4,8],[5,8],[6,8]]
+      elephant: [[2,9],[6,9],[0,7],[4,7],[8,7],[2,5],[6,5]],
+      advisor: [[3,9],[5,9],[4,8],[3,7],[5,7]],
+      general: [[3,9],[4,9],[5,9],[3,8],[4,8],[5,8],[3,7],[4,7],[5,7]]
     }
   }
   
+  // Test if a position is included in an array of positions
+  const includesPositionTest = (position, positionsArray) => {
+
+    const positionString = JSON.stringify(position),
+          positionsArrayString = JSON.stringify(positionsArray)
+
+    if (positionsArrayString.includes(positionString)) return true
+    else return false
+  }
+
   // Library of Movement Rules for Each Piece
   // Global Object (Complete)
   const movementRules = {
   
     general: function(boardState, pieceSide, startFile, startRank) {
   
-      const availableDestinations = []
-  
-      for (let i = 0; i <= 1; ++i) {
-        availableDestinations.push([startFile + i, startRank + 1 - i])
-        availableDestinations.push([startFile - i, startRank - 1 + i])
-      }
+      const availableDestinations = [
+        [startFile + 1, startRank],
+        [startFile - 1, startRank],
+        [startFile, startRank + 1],
+        [startFile, startRank - 1]]
   
       return availableDestinations
     },
   
     advisor: function(boardState, pieceSide, startFile, startRank) {
-  
-      const availableDestinations = []
-  
-      for (let i = -1; i <= 1; i += 2) {
-        availableDestinations.push([startFile + i, startRank + 1/i])
-        availableDestinations.push([startFile + i, startRank - 1/i])
-      }
+      
+      const availableDestinations = [
+        [startFile + 1, startRank + 1],
+        [startFile - 1, startRank + 1],
+        [startFile + 1, startRank - 1],
+        [startFile - 1, startRank - 1]]
   
       return availableDestinations
     },
   
     elephant: function(boardState, pieceSide, startFile, startRank) {
   
-      const availableDestinations = []
-  
-      for (let i = -1; i <= 1; i += 2) {
-        availableDestinations.push([startFile + i*2, startRank + 2/i])
-        availableDestinations.push([startFile + i*2, startRank - 2/i])
+      const availableDestinations = [],
+            movementVectors = [[1,1],[-1,1],[1,-1],[-1,-1]]
+
+      for (let i = 0; i < movementVectors.length; ++i) {
+        
+        const fileMovement = movementVectors[i][0],
+              rankMovement = movementVectors[i][1]
+
+        const intermediatePosition = [startFile + fileMovement, startRank + rankMovement]
+
+        if (!includesPositionTest(intermediatePosition, boardState.positions)) {
+
+          const finalPosition = [startFile + fileMovement*2, startRank + rankMovement*2]
+
+          availableDestinations.push(finalPosition)
+        }
       }
-  
+
       return availableDestinations
     },
   
     horse: function(boardState, pieceSide, startFile, startRank) {
   
-      const availableDestinations = []
-  
-      const allPositionsString = JSON.stringify(boardState.positions)
-  
-      for (let i = 0; i <= 1; ++i) {
-        for (let j = -1; j <= 1; j += 2) {
-  
-          const fileMovement = j * i,
-                rankMovement = j * (1 - i)
-          
-          const orthogonalMovement = [startFile + fileMovement, startRank + rankMovement]
-          const orthogonalMovementString = JSON.stringify(orthogonalMovement)
-          
-          if (!allPositionsString.includes(orthogonalMovementString)) {
-            if (!fileMovement) {
-              availableDestinations.push([orthogonalMovement[0] + rankMovement, orthogonalMovement[1] + rankMovement])
-              availableDestinations.push([orthogonalMovement[0] - rankMovement, orthogonalMovement[1] + rankMovement])  
-            } else if (!rankMovement) {
-              availableDestinations.push([orthogonalMovement[0] + rankMovement, orthogonalMovement[1] + rankMovement])
-              availableDestinations.push([orthogonalMovement[0] + rankMovement, orthogonalMovement[1] - rankMovement])
-            }
+      const availableDestinations = [],
+            orthogonalVectors = [[1,0],[-1,0],[0,1],[0,-1]]
+
+      for (let i = 0; i < orthogonalVectors.length; ++i) {
+        
+        const fileMovement = orthogonalVectors[i][0],
+              rankMovement = orthogonalVectors[i][1]
+
+        const intermediatePosition = [startFile + fileMovement, startRank + rankMovement]
+
+        if (!includesPositionTest(intermediatePosition, boardState.positions)) {
+
+          if (!rankMovement) {
+            availableDestinations.push(
+              [startFile + fileMovement * 2, startRank + 1],
+              [startFile + fileMovement * 2, startRank - 1])
+
+          } else if (!fileMovement) {
+            availableDestinations.push(
+              [startFile + 1, startRank + rankMovement * 2],
+              [startFile - 1, startRank + rankMovement * 2])
           }
         }
       }
@@ -183,16 +166,14 @@ const defaultPositions = {
     chariot: function(boardState, pieceSide, startFile, startRank) {
   
       const availableDestinations = []
-  
-      for (let i = -1; i <= 1; i += 2) {
-        for (let j = 1; j <= 9; ++j) {
-  
-          const destinationFile = startFile + i*j
-          const destinationRank = startRank + i*j
-  
-          availableDestinations.push([destinationFile, startRank])
-          availableDestinations.push([startFile, destinationRank])
-        }
+
+      for (let i = 1; i <= 9; ++i) {
+
+        availableDestinations.push(
+          [startFile + i, startRank],
+          [startFile - i, startRank],
+          [startFile, startRank + i],
+          [startFile, startRank - i])
       }
   
       return availableDestinations
@@ -201,16 +182,14 @@ const defaultPositions = {
     cannon: function(boardState, pieceSide, startFile, startRank) {
   
       const availableDestinations = []
-  
-      for (let i = -1; i <= 1; i += 2) {
-        for (let j = 1; j <= 9; ++j) {
-  
-          const destinationFile = startFile + i*j
-          const destinationRank = startRank + i*j
-  
-          availableDestinations.push([destinationFile, startRank])
-          availableDestinations.push([startFile, destinationRank])
-        }
+
+      for (let i = 1; i <= 9; ++i) {
+
+        availableDestinations.push(
+          [startFile + i, startRank],
+          [startFile - i, startRank],
+          [startFile, startRank + i],
+          [startFile, startRank - i])
       }
   
       return availableDestinations
@@ -221,36 +200,27 @@ const defaultPositions = {
       const soldierMovementRules = {
         red: {
           forwardMovement: 1,
-          upgradeRanks: [6,7,8,9,10]
+          upgradeRanks: [5,6,7,8,9]
         },
         black: {
           forwardMovement: -1,
-          upgradeRanks: [1,2,3,4,5]
+          upgradeRanks: [0,1,2,3,4]
         }
       }
   
-      const availableDestinations = []
-  
-      const soldierSideSpecificMovement = soldierMovementRules[pieceSide]
+      const availableDestinations = [],
+            soldierSideSpecificMovement = soldierMovementRules[pieceSide]
   
       if (!soldierSideSpecificMovement.upgradeRanks.includes(startRank)) {
         availableDestinations.push([startFile, startRank + soldierSideSpecificMovement.forwardMovement])
   
       } else {
-        const prelimAvailableDestinations = []
-        
-        prelimAvailableDestinations.push([startFile + 1, startRank])
-        prelimAvailableDestinations.push([startFile - 1, startRank])
-        prelimAvailableDestinations.push([startFile, startRank + soldierSideSpecificMovement.forwardMovement])
-  
-        for (let i = 0; i < prelimAvailableDestinations.length; ++i) {
-          const selectedDestination = prelimAvailableDestinations[i]
-          
-          if (soldierSideSpecificMovement.upgradeRanks.includes(selectedDestination[1])) {
-            availableDestinations.push(selectedDestination)
-          }
-        }
+        availableDestinations.push(
+          [startFile + 1, startRank],
+          [startFile - 1, startRank],
+          [startFile, startRank + soldierSideSpecificMovement.forwardMovement])
       }
+
       return availableDestinations
     },
   }
@@ -354,16 +324,14 @@ const defaultPositions = {
       // Create object with piece name as key and type and currentPosition information
   
       const file = allPositions[selectedPiece][0],
-            rank = allPositions[selectedPiece][1]
-  
-      const notationFile = fileNotation[file - 1],
-            notationRank = rank - 1
+            rank = allPositions[selectedPiece][1],
+            notationFile = fileNotation[file]
   
       allPieces[selectedPieceSide][selectedPiece] = {
         type: selectedPieceType,
         notation: selectedNotationSide + selectedNotationType,
         currentPosition: [file, rank],
-        notationPosition: notationFile + notationRank
+        notationPosition: notationFile + rank
       }
     }
   
@@ -383,7 +351,7 @@ const defaultPositions = {
               pieceFile = piecePosition[0],
               pieceRank = piecePosition[1]
   
-        mappedBoard[10-pieceRank][pieceFile-1] = piece // Assigns pieces to their places in the array
+        mappedBoard[9-pieceRank][pieceFile] = piece // Assigns pieces to their places in the array
       }
     }
   
@@ -468,8 +436,8 @@ const defaultPositions = {
     } else {
   
       // Loop through each rank and look for pieces between the generals
-      for (let i = (10-general_blackPosition[1]) + 1; i < (10-general_redPosition[1]); ++i) {
-        if (boardState.board[i][general_redPosition[0]-1]) {
+      for (let i = (9-general_blackPosition[1]) + 1; i < (9-general_redPosition[1]); ++i) {
+        if (boardState.board[i][general_redPosition[0]]) {
           return false
         }
       }
@@ -574,7 +542,7 @@ const defaultPositions = {
   
     let moveOrCaptureDestinations = {}
   
-    if (pieceType === 'chariot' || pieceType === 'elephant' || pieceType === 'cannon') {
+    if (pieceType === 'chariot' || pieceType === 'cannon') {
   
       moveOrCaptureDestinations = moveOrCaptureFilter[pieceType](definedPathsDestinations, boardState, pieceFile, pieceRank, pieceSide, enemySide)
   
@@ -601,7 +569,7 @@ const defaultPositions = {
       move: [],
       capture: []
     }
-  
+
     for (let i = 0; i < availableDestinations.move.length; ++i) { // Looping through available 'move' destinations for selected piece
   
       const selectedDestination = availableDestinations.move[i]
@@ -612,7 +580,7 @@ const defaultPositions = {
   
     }
   
-    for (let i = 0; i < availableDestinations.capture.length; ++i) { // Looping through available 'move' destinations for selected piece
+    for (let i = 0; i < availableDestinations.capture.length; ++i) { // Looping through available 'capture' destinations for selected piece
   
       const selectedDestination = availableDestinations.capture[i]
   
@@ -629,10 +597,10 @@ const defaultPositions = {
   const nextTurnModel = (boardState, pieceName, pieceSide, selectedDestination, currentTurn, nextTurn, moveOrCapture) => { // currentTurn: red, nextTurn: black
   
     const nextBoardState = deepCopyBoard(boardState) // Create hypothetical board
-    // console.log(pieceName, selectedDestination)
+
     if (moveOrCapture === 'capture') { // If selected move is a capture
-  
-      const capturedPieceName = boardState.board[10-selectedDestination[1]][selectedDestination[0]-1] // Find the enemy piece in selected destination
+
+      const capturedPieceName = boardState.board[9-selectedDestination[1]][selectedDestination[0]] // Find the enemy piece in selected destination
     
       nextBoardState.capturedPieces[nextTurn].push(capturedPieceName) // Add the captured enemy piece to Captured Pieces object (enemy side is same as nextTurn)
   
@@ -682,7 +650,7 @@ const defaultPositions = {
             selectedFile = selectedDestination[0],
             selectedRank = selectedDestination[1]
   
-      if ((selectedFile >= 1 && selectedFile <= 9) && (selectedRank >= 1 && selectedRank <= 10)) {
+      if ((selectedFile >= 0 && selectedFile <= 9) && (selectedRank >= 0 && selectedRank <= 9)) {
         filteredAvailableDestinations.push(selectedDestination)
       }
     }
@@ -716,30 +684,32 @@ const defaultPositions = {
     }
   }
   
-  // Filter Available Positions by Moves/Captures (Contains Special Rules for General, Chariot, Cannon, Elephant)
+  // Filter Available Positions by Moves/Captures (Contains Special Rules for Chariot and Cannon)
   // Level 1 Function Object (Complete)
   const moveOrCaptureFilter = {
   
-    // All Pieces Except Chariot, Cannon, Elephant
+    // All Pieces Except Chariot and Cannon
     default: function(availableDestinations, boardState, pieceFile, pieceRank, pieceSide, enemySide) {
     
       const filteredAvailableDestinations = {
         move: [],
         capture: []
       }
-  
-      const friendPositionsString = JSON.stringify(boardState.positions[pieceSide]),
-            enemyPositionsString = JSON.stringify(boardState.positions[enemySide])
+      
+      // Positions of friend and enemy units
+      const friendPositions = boardState.positions[pieceSide],
+            enemyPositions = boardState.positions[enemySide]
   
       for (let i = 0; i < availableDestinations.length; ++i) {
   
-        const selectedDestination = availableDestinations[i],
-              selectedDestinationString = JSON.stringify(selectedDestination)
-  
-        if (enemyPositionsString.includes(selectedDestinationString)) {
+        const selectedDestination = availableDestinations[i]
+        
+        // If destination contains enemy unit, push as capture
+        if (includesPositionTest(selectedDestination, enemyPositions)) {
           filteredAvailableDestinations.capture.push(selectedDestination)
-  
-        } else if (!friendPositionsString.includes(selectedDestinationString)) {
+        
+        // If destination doesn't contain friend unit, push as move
+        } else if (!includesPositionTest(selectedDestination, friendPositions)) {
           filteredAvailableDestinations.move.push(selectedDestination)
         }
       }
@@ -753,71 +723,37 @@ const defaultPositions = {
         move: [],
         capture: []
       }
+
+      const friendPositions = boardState.positions[pieceSide],
+            enemyPositions = boardState.positions[enemySide],
+            movementVectors = [[1,0],[-1,0],[0,1],[0,-1]]
   
-      const friendPositionsString = JSON.stringify(boardState.positions[pieceSide]),
-            enemyPositionsString = JSON.stringify(boardState.positions[enemySide]),
-            availableDestinationsString = JSON.stringify(availableDestinations)
-  
-      for (let i = 0; i <= 1; ++i) { // Looping through horizontal and vertical movement (i = horizontal multiplier, 1-i = vertical multiplier)
-  
-        for (let j = -1; j <= 1; j += 2) { // Looping through left/right and down/up
-  
-          for (let k = 1; k <= 9; ++k) { // Looping through 9 orthogonal steps
-  
-            const orthogonalDestination = [pieceFile + i*j*k, pieceRank + (1-i)*j*k],
-                  orthogonalDestinationString = JSON.stringify(orthogonalDestination)
-  
-            if (availableDestinationsString.includes(orthogonalDestinationString)) {
-  
-              if (enemyPositionsString.includes(orthogonalDestinationString)) {
-                filteredAvailableDestinations.capture.push(orthogonalDestination)
-                break // Stop at first enemy found along an orthogonal direction (and capture)
-  
-              } else if (friendPositionsString.includes(orthogonalDestinationString)) {
-                break // Stop at first friend found along an orthogonal direction
-  
-              } else {
-                filteredAvailableDestinations.move.push(orthogonalDestination)
-                // Allow movement if no pieces are in the way
-              }
+      for (let i = 0; i < movementVectors.length; ++i) { // Looping through each direction (right, left, up, down)
+
+        const fileVector = movementVectors[i][0], // 1
+              rankVector = movementVectors[i][1] // 0
+
+        for (let j = 1; j <= 9; ++j) { // Looping through 9 orthogonal steps
+
+          const orthogonalDestination = [pieceFile + fileVector*j, pieceRank + rankVector*j] // [1*1, 0*1]
+
+          if (includesPositionTest(orthogonalDestination, availableDestinations)) { 
+
+            if (includesPositionTest(orthogonalDestination, enemyPositions)) {
+              filteredAvailableDestinations.capture.push(orthogonalDestination)
+              break // Stop at first enemy found along an orthogonal direction (and capture)
+
+            } else if (includesPositionTest(orthogonalDestination, friendPositions)) {
+              break // Stop at first friend found along an orthogonal direction
+
+            } else {
+              filteredAvailableDestinations.move.push(orthogonalDestination)
+              // Allow movement if no pieces are in the way
             }
           }
         }
       }
-      return filteredAvailableDestinations
-    },
-  
-    elephant: function(availableDestinations, boardState, pieceFile, pieceRank, pieceSide, enemySide) {
-  
-      const filteredAvailableDestinations = {
-        move: [],
-        capture: []
-      }
-  
-      const friendPositionsString = JSON.stringify(boardState.positions[pieceSide])
-            enemyPositionsString = JSON.stringify(boardState.positions[enemySide])
-  
-      for (let i = 0; i < availableDestinations.length; ++i) {
-  
-        const selectedDestination = availableDestinations[i],
-              selectedDestinationString = JSON.stringify(selectedDestination),
-              selectedDestinationFile = selectedDestination[0],
-              selectedDestinationRank = selectedDestination[1]
-  
-        const intermediatePosition = [(selectedDestinationFile + pieceFile)/2, (selectedDestinationRank + pieceRank)/2],
-              intermediatePositionString = JSON.stringify(intermediatePosition)
-  
-        if (!friendPositionsString.includes(intermediatePositionString) && !enemyPositionsString.includes(intermediatePositionString)) {
-        // Test if pieces are blocking diagonal movement
-  
-          if (enemyPositionsString.includes(selectedDestinationString)) {
-            filteredAvailableDestinations.capture.push(selectedDestination)
-  
-          } else if (!friendPositionsString.includes(selectedDestinationString)) {
-            filteredAvailableDestinations.move.push(selectedDestination)
-          }
-        }
-      }
+
       return filteredAvailableDestinations
     },
   
@@ -828,37 +764,37 @@ const defaultPositions = {
         capture: []
       }
   
-      const friendPositionsString = JSON.stringify(boardState.positions[pieceSide]),
-            enemyPositionsString = JSON.stringify(boardState.positions[enemySide]),
-            availableDestinationsString = JSON.stringify(availableDestinations)
+      const friendPositions = boardState.positions[pieceSide],
+            enemyPositions = boardState.positions[enemySide],
+            movementVectors = [[1,0],[-1,0],[0,1],[0,-1]]
       
-      for (let i = 0; i <= 1; ++i) { // Looping through horizontal and vertical movement (i = horizontal multiplier, 1-i = vertical multiplier)
+      for (let i = 0; i < movementVectors.length; ++i) { // Looping through each direction (right, left, up, down)
+      
+        let intermediatePiecePosition = [],
+            fileVector = movementVectors[i][0],
+            rankVector = movementVectors[i][1]
   
-        for (let j = -1; j <= 1; j += 2) { // Looping through left/right and down/up
-  
-          let intermediatePiecePosition = []
-  
-          for (let k = 1; k <= 9; ++k) { // Looping through 9 orthogonal steps
-  
-            const orthogonalDestination = [pieceFile + i*j*k, pieceRank + (1-i)*j*k],
-                  orthogonalDestinationString = JSON.stringify(orthogonalDestination)
-  
-            if (availableDestinationsString.includes(orthogonalDestinationString)) {
-              if (!intermediatePiecePosition.length) { // If no intermediate piece has been found yet
-                if (enemyPositionsString.includes(orthogonalDestinationString) || friendPositionsString.includes(orthogonalDestinationString)) {
-  
-                  intermediatePiecePosition = orthogonalDestination // First friend or enemy piece in orthogonal direction is assigned as intermediate piece
-  
-                } else {
-                  filteredAvailableDestinations.move.push(orthogonalDestination) // Allow movement if no pieces are in the way
-                }
-  
-              } else { // If an intermediate piece has already been found
-  
-                if (enemyPositionsString.includes(orthogonalDestinationString)) {
-                  filteredAvailableDestinations.capture.push(orthogonalDestination)
-                  break // Allow capture on the next enemy piece found
-                }
+        for (let j = 1; j <= 9; ++j) { // Looping through 9 orthogonal steps
+
+          const orthogonalDestination = [pieceFile + fileVector*j, pieceRank + rankVector*j]
+
+          if (includesPositionTest(orthogonalDestination, availableDestinations)) {
+
+            if (!intermediatePiecePosition.length) { // If no intermediate piece has been found yet
+
+              if (includesPositionTest(orthogonalDestination, enemyPositions) || includesPositionTest(orthogonalDestination, friendPositions)) {
+
+                intermediatePiecePosition = orthogonalDestination // First friend or enemy piece in orthogonal direction is assigned as intermediate piece
+
+              } else {
+                filteredAvailableDestinations.move.push(orthogonalDestination) // Allow movement if no pieces are in the way
+              }
+
+            } else { // If an intermediate piece has already been found
+
+              if (includesPositionTest(orthogonalDestination, enemyPositions)) {
+                filteredAvailableDestinations.capture.push(orthogonalDestination)
+                break // Allow capture on the next enemy piece found
               }
             }
           }
@@ -872,9 +808,6 @@ const defaultPositions = {
   
   // ----- MOVE PIECE ----- //
   
-  const notatedMove = (str) => { // 'a0a1'
-    const 
-  }
   
   const movePiece = (boardState, pieceName, selectedDestination) => {
   
@@ -937,20 +870,21 @@ const defaultPositions = {
   
   
   const newBoard = newGameBoard(defaultPositions)
+  // console.log(newBoard)
   
   const turn0 = establishTurn(newBoard)
   
-  // console.log(turn0)
+  console.log(turn0)
   
-  let pieceToMove1 = 'chariot_red_left'
-  let piece1Destination = [1,2]
-  const turn1 = movePiece(turn0, pieceToMove1, piece1Destination)
+  // let pieceToMove1 = 'chariot_red_left'
+  // let piece1Destination = [1,2]
+  // const turn1 = movePiece(turn0, pieceToMove1, piece1Destination)
   
-  console.log(turn1)
-  // console.log(turn1.pieces.red)
+  // console.log(turn1)
+  // // console.log(turn1.pieces.red)
   
-  let pieceCheckRed = 'general_red'
-  let pieceCheckBlack = 'general_black'
+  // let pieceCheckRed = 'general_red'
+  // let pieceCheckBlack = 'general_black'
   
   // console.log(pieceCheckRed, turn1.pieces.red[pieceCheckRed].availableDestinations)
   // console.log(pieceCheckBlack, turn1.pieces.black[pieceCheckBlack].availableDestinations)
