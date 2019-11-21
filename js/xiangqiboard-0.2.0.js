@@ -21,11 +21,11 @@
   var ROW_TOP = 9
   var ROW_LOW = 0
   var ROW_LENGTH = ROW_TOP - ROW_LOW + 1
-  var COLUMNS = Object.freeze('abcdefghi'.split('')) // Creates array of column letters
+  var COLUMNS = Object.freeze('abcdefghi'.split(''))
   var DEFAULT_DRAG_THROTTLE_RATE = 20
   var ELLIPSIS = '...'
   var MINIMUM_JQUERY_VERSION = '1.8.3'
-  var START_FEN = 'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR' // starting positions
+  var START_FEN = 'rnbakabnr/9/1c5c1/p1p1p1p1p/9/9/P1P1P1P1P/1C5C1/9/RNBAKABNR'
   var START_POSITION = fenToObj(START_FEN)
 
   // default animation speeds
