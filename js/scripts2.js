@@ -1,5 +1,6 @@
 let board = null;
 let game = newGame(defaultPositions);
+let $status = $('#status');
 
 function onDragStart (source, piece, position, orientation) {
   // do not pick up pieces if the game is over
@@ -23,7 +24,7 @@ function onDrop (source, target) {
   if (!move) return 'snapback';
 
   game = move
-  // updateStatus();
+  updateStatus();
 }
 
 function onSnapEnd () {
@@ -39,4 +40,33 @@ let config = {
 };
 board = Xiangqiboard('myBoard', config);
 
-// updateStatus();
+function updateStatus () {
+  let status = '';
+
+  let moveColor = game.status.currentTurn
+
+  // checkmate?
+  if (game.status.checkmate) {
+    status = 'Game over, ' + moveColor + ' is in checkmate.';
+  }
+
+  // draw?
+  // else if (game.in_draw()) {
+  //   status = 'Game over, drawn position';
+  // }
+
+  // game still on
+  else {
+    status = moveColor + ' to move';
+
+    // check?
+    if (game.status.check[moveColor].inCheck) {
+      status += ', ' + moveColor + ' is in check';
+    }
+  }
+
+  $status.html(status);
+
+}
+
+updateStatus();

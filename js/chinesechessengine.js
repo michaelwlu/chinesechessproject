@@ -278,7 +278,16 @@ const newGame = (allPositions) => {
       currentTurn: 'red',
       nextTurn: 'black',
       turnNumber: 0,
-      check: {},
+      check: {
+        red: {
+          inCheck: false,
+          checkingPieces: []
+        },
+        black: {
+          inCheck: false,
+          checkingPieces: []
+        }
+      },
       checkmate: false,
       gameOver: false,
       availableMoves: {
@@ -443,8 +452,9 @@ const flyingGeneralTest = (boardState) => {
   // Get positions of the two generals
   const general_redPosition = boardState.pieces.red.general_red.currentPosition,
         general_blackPosition = boardState.pieces.black.general_black.currentPosition
-
+  
   if (general_redPosition[0] !== general_blackPosition[0]) {
+
     return false // If the two generals are not on the same file, move on
 
   } else {
@@ -569,7 +579,7 @@ const nextTurnTest = (availableDestinations, boardState, pieceName, pieceSide, c
       filteredAvailableDestinations.capture.push(selectedDestination)
     }
   }
-
+  
   return filteredAvailableDestinations
 }
 
@@ -579,9 +589,9 @@ const nextTurnModel = (boardState, pieceName, pieceSide, selectedDestination, cu
 
   const nextBoardState = deepCopyBoard(boardState) // Create hypothetical board
 
-  const notatedDestination = numericalToNotated(selectedDestination)
+  const selectedNotatedDestination = numericalToNotated(selectedDestination)
 
-  const capturedPieceName = nextBoardState.notatedBoard[notatedDestination]
+  const capturedPieceName = nextBoardState.notatedBoard[selectedNotatedDestination]
 
   if (capturedPieceName) { // If selected move is a capture
 
@@ -591,13 +601,14 @@ const nextTurnModel = (boardState, pieceName, pieceSide, selectedDestination, cu
   }
 
   nextBoardState.pieces[pieceSide][pieceName].currentPosition = selectedDestination
+  nextBoardState.pieces[currentTurn][pieceName].notatedPosition = selectedNotatedDestination
   // Play out the selected movement
 
   // nextBoardState.board = mapBoard(nextBoardState.board, nextBoardState.pieces) // Map the new board
 
   nextBoardState.positions = positionsBySide(nextBoardState.pieces) // List positions for new board
-  nextBoardState.notatedBoard = notateBoard(boardState.pieces) // Notates new board
-  
+  nextBoardState.notatedBoard = notateBoard(nextBoardState.pieces) // Notates new board
+
   if (flyingGeneralTest(nextBoardState)) return false // If flying generals are exposed, immediately skip to next available move
 
   establishPieceMovements(nextBoardState, nextTurn, currentTurn, nextTurn)
@@ -804,11 +815,7 @@ const movePiece = (boardState, selectedNotatedSource, selectedNotatedDestination
       nextTurn = boardState.status.nextTurn
 
   const pieceName = boardState.notatedBoard[selectedNotatedSource]
-  // console.log(boardState.notatedBoard)
-  // console.log(pieceName)
-  // console.log(boardState.pieces.red.soldier_red_3)
-
-  // console.log(boardState.pieces[movingSide].soldier_red_3)
+  
   const pieceAvailableDestinations = boardState.pieces[movingSide][pieceName].availableDestinations,
         selectedDestination = notatedToNumerical(selectedNotatedDestination)
 
@@ -857,8 +864,8 @@ const movePiece = (boardState, selectedNotatedSource, selectedNotatedDestination
     newBoardState.status.checkmate = checkmateTest(newBoardState, currentTurn)
     newBoardState.status.gameOver = newBoardState.status.checkmate
     
-    console.log(`checkmate: ${newBoardState.status.checkmate}`)
-    console.log(`gameOver: ${newBoardState.status.gameOver}`)
+    // console.log(`checkmate: ${newBoardState.status.checkmate}`)
+    // console.log(`gameOver: ${newBoardState.status.gameOver}`)
     return newBoardState
   }
 }
@@ -882,12 +889,9 @@ const checkmateTest = (boardState, checkedSide) => {
   const inCheck = boardState.status.check[checkedSide].inCheck,
         availableMoves = boardState.status.availableMoves[checkedSide]
 
-  console.log(availableMoves)
-  console.log(inCheck)
   if (inCheck && !availableMoves) return true
   else return false
 }
-
 
 
 // ----- TESTS ----- //
