@@ -1,3 +1,5 @@
-# chinesechessproject
+# chinese-chess
 
-https://michaelwlu.github.io/chinesechessproject/
+Chinese Chess engine with Javascript
+
+https://chinesechess.michaelwenlu.com
